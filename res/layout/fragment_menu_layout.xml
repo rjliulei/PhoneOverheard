@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/app_icon" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:text="@string/app_name"
+            android:textColor="@color/xingren_bai"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:text="这里有你看不完的妹纸~^~"
+        android:textColor="@color/xingren_bai" />
+
+    <LinearLayout
+        android:id="@+id/menu_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/bt_shouye"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/icon_menu_home"
+            android:drawablePadding="5dp"
+            android:gravity="left|center"
+            android:text="@string/home_title"
+            android:textColor="@color/xingren_bai"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/bt_xiaoqingxin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/icon_menu_meinv"
+            android:drawablePadding="5dp"
+            android:gravity="left|center"
+            android:text="发现美女"
+            android:textColor="@color/xingren_bai"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/bt_collect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/icon_menu_sgouchang"
+            android:drawablePadding="5dp"
+            android:gravity="left|center"
+            android:text="我的收藏"
+            android:textColor="@color/xingren_bai"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/showRecommendAppWall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/icon_menu_app"
+            android:drawablePadding="5dp"
+            android:gravity="left|center"
+            android:text="应用推荐"
+            android:textColor="@color/xingren_bai"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/showRecommendGameWall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/icon_menu_game"
+            android:drawablePadding="5dp"
+            android:gravity="left|center"
+            android:text="游戏推荐"
+            android:textColor="@color/xingren_bai"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/bt_systemSetting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/icon_meun_setting"
+            android:drawablePadding="5dp"
+            android:gravity="left|center"
+            android:text="系统设置"
+            android:textColor="@color/xingren_bai"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/bt_exit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:drawableLeft="@drawable/exit"
+            android:drawablePadding="5dp"
+            android:gravity="left|center_vertical"
+            android:text="退出"
+            android:textColor="@color/xingren_bai" />
+
+        <Button
+            android:id="@+id/bt_setting"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:drawableLeft="@drawable/icon_8"
+            android:drawablePadding="5dp"
+            android:gravity="left|center_vertical"
+            android:text="设置"
+            android:textColor="@color/xingren_bai" />
+    </LinearLayout>
+
+</LinearLayout>

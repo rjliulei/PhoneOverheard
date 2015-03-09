@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">妹纸图库</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="str_xiaoqingxin">小清新</string>
+    <string name="str_xiezhen">美女写真</string>
+    <string name="str_xinggan">性感诱惑</string>
+    <string name="str_youhuo">诱惑写真</string>
+    <string name="str_tiansuchun">甜素纯</string>
+    <string name="str_changtui">长腿诱惑</string>
+    <string name="str_gaoyayoufan">高雅有范</string>
+    <string name="str_xiaohua">校花</string>
+    <string name="str_qizhi">气质美女</string>
+    <string name="str_shishang">时尚美女</string>
+    <string name="str_bijini">比基尼</string>
+    <string name="str_changfa">长发美女</string>
+    <string name="str_chemo">车模名媛</string>
+    <string name="str_wangluomeinv">网络美女</string>
+    <string name="str_gudianmeinv">古典美女</string>
+    <string name="str_feizhuliu">非主流</string>
+    <string name="str_quanbu">全部美女</string>
+    <string name="str_duanfa">短发美女</string>
+    <string name="str_zuqiubaobie">足球宝贝</string>
+    <string name="str_weimei">唯美</string>
+    <string name="str_suyan">素颜</string>
+    <string name="str_keai">可爱</string>
+    <string name="str_luoli">萝莉</string>
+    <string name="home_title">首页</string>
+    <string name="download">下载</string>
+    <string name="str_qingchun">清纯</string>
+    <string name="share">分享</string>
+    <string name="set_wallpaper">设置壁纸</string>
+    <string name="collect">收藏</string>
+    <string name="actionbar_activity_not_found">Failed to open intent&#8230;</string>
+    <string name="umeng_example_home_hint_wait">Coming soooooon</string>
+    <string name="intro"> The webview before show js call Umeng Analytics APIs</string>
+    <string name="clear_cache">清除缓存</string>
+    <string name="about">&#160;&#160; &#x000A;&#x000D;&#160;&#160;&#160;&#160;软件免费下载，安装，注意流量监控，浏览图片会造成大量流量。 \n  &#x000A;&#x000D;&#160;&#160;&#160;&#160;
+      为给本软件增加可玩性,软件上面增加了广告,看到什么好玩有趣的广告,不要忘记点击一下。但如果广告给你造成不便,请谅解。 \n &#x000A;&#x000D;&#160;&#160;&#160;&#160;
+    本软件刊载的所有内容，包括文字、图片等均在网上搜集，并非本人收集，存储。本人只是搬运工，把类似的东西搬运在一起。访问者可将本网站提供的内容或服务用于个人学习、研究或欣赏，以及其他非商业性或非盈利性用途，但同时应遵守著作权法及其他相关法律的规定，不得侵犯本软件及相关权利人的合法权利</string>
+
+</resources>

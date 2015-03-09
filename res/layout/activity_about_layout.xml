@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/list_bg_color"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <include layout="@layout/top_bar" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/app_logo"
+                android:layout_width="102dp"
+                android:layout_height="102dp"
+                android:background="@drawable/app_icon" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/not_version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:textColor="@color/dark_gray" />
+
+        <TextView
+            android:id="@+id/not_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="软件说明 "
+            android:textColor="@color/dark_gray" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/about" />
+
+        <TextView
+            android:id="@+id/not_sinaweibo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:textColor="@color/dark_gray" />
+        
+
+        <TextView
+            android:id="@+id/src_see"
+            style="@style/MoreSettingItem"
+            android:layout_height="52dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/round_corner_item_single_bg"
+            android:gravity="center"
+            android:text="查看源码"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/src_address"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/round_corner_item_single_bg"
+            android:gravity="center"
+            android:textSize="17sp" />
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/list_bg_color"
+    android:orientation="vertical" >
+
+    <include layout="@layout/top_bar" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="0.0dip"
+        android:layout_weight="1.0"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/round_corner_bg_item_padding" >
+
+            <LinearLayout
+                android:id="@+id/wifi_settings"
+                style="@style/MoreSettingItem"
+                android:background="@drawable/round_corner_item_single_bg" >
+
+                <TextView
+                    android:id="@+id/wifi_name"
+                    style="@style/MoreItemTextStyle"
+                    android:drawableLeft="@drawable/setting_btn"
+                    android:text="仅在Wifi下使用" />
+
+                <CheckBox
+                    android:id="@+id/wifi_checkBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+                </CheckBox>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/item_rc_app"
+                style="@style/TextSettingItem"
+                android:layout_marginTop="@dimen/round_corner_bg_item_padding"
+                android:background="@drawable/round_corner_item_above_bg"
+                android:drawableLeft="@drawable/ic_app_normal"
+                android:text="应用推荐" />
+
+            <TextView
+                android:id="@+id/item_rc_game"
+                style="@style/TextSettingItem"
+                android:background="@drawable/round_corner_item_middle_bg"
+                android:drawableLeft="@drawable/item_game_icon"
+                android:text="游戏下载" />
+
+            <TextView
+                android:id="@+id/item_checkupdate"
+                style="@style/TextSettingItem"
+                android:background="@drawable/round_corner_item_middle_bg"
+                android:drawableLeft="@drawable/ic_download_pressed"
+                android:text="检测更新" />
+
+            <LinearLayout
+                android:id="@+id/item_clear_cache"
+                style="@style/MoreSettingItem"
+                android:background="@drawable/round_corner_item_below_bg" >
+
+                <TextView
+                    style="@style/MoreItemTextStyle"
+                    android:drawableLeft="@drawable/ic_clear_cache"
+                    android:text="@string/clear_cache" />
+
+                <TextView
+                    android:id="@+id/cache_size"
+                    style="@style/SettingAttributeText"
+                    android:drawableRight="@null" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/item_about"
+                style="@style/TextSettingItem"
+                android:layout_marginTop="@dimen/round_corner_bg_item_padding"
+                android:background="@drawable/round_corner_item_above_bg"
+                android:drawableLeft="@drawable/ic_account"
+                android:text="关于我们" />
+
+            <TextView
+                android:id="@+id/item_feedback"
+                style="@style/TextSettingItem"
+                android:background="@drawable/round_corner_item_below_bg"
+                android:drawableLeft="@drawable/ic_feedback"
+                android:text="意见反馈" />
+
+            <TextView
+                android:id="@+id/item_out"
+                style="@style/MoreSettingItem"
+                android:layout_height="52dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/round_corner_item_single_bg"
+                android:gravity="center"
+                android:text="退出程序"
+                android:textSize="17sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

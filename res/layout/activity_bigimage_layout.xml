@@ -1,0 +1,67 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ProgressWheel="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parent_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_gray" >
+
+    <cn.linving.girls.view.AttacherImageView
+        android:id="@+id/mBigImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerCrop" />
+
+    <cn.linving.girls.view.ProgressWheel
+        android:id="@+id/mProgressBar"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        ProgressWheel:barColor="#7FFFD4"
+        ProgressWheel:barLength="60dp"
+        ProgressWheel:barWidth="25dp"
+        ProgressWheel:rimColor="#44000000"
+        ProgressWheel:rimWidth="25dp"
+        ProgressWheel:spinSpeed="3dp"
+        ProgressWheel:text="0%"
+        ProgressWheel:textColor="#C1FFC1"
+        ProgressWheel:textSize="14sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:padding="3dp" >
+
+        <Button
+            android:id="@+id/bt_downLoad"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:background="@drawable/pic_dawnload_selector" />
+
+        <Button
+            android:id="@+id/bt_share"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/pic_share_selector" />
+
+        <Button
+            android:id="@+id/bt_setwallpaper"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/pic_wallpaper_selector" />
+
+        <CheckBox
+            android:id="@+id/rb_collect"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/pic_love_selector"
+            android:button="@null" />
+    </LinearLayout>
+
+</RelativeLayout>
