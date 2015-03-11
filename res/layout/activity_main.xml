@@ -27,10 +27,49 @@
             android:layout_width="250dp"
             android:layout_height="match_parent" />
 
-        <FrameLayout
-            android:id="@+id/slidingpane_content"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:id="@+id/ll_bottom_group"
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:layout_alignParentBottom="true"
+                android:gravity="center_vertical"
+                android:background="@color/background_1"
+                android:orientation="horizontal" >
+
+                <RelativeLayout style="@style/ButtomBar" >
+
+                    <ImageButton
+                        android:id="@+id/buttom_news"
+                        style="@style/ButtomBarImgBtn"
+                        android:background="@drawable/bar_news"/>
+                </RelativeLayout>
+
+                <RelativeLayout style="@style/ButtomBar" >
+
+                    <ImageButton
+                        android:id="@+id/buttom_constact"
+                        style="@style/ButtomBarImgBtn"
+                        android:background="@drawable/bar_constact"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_above="@id/ll_bottom_group"
+                android:background="@color/devide_line" />
+
+            <FrameLayout
+                android:id="@+id/slidingpane_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/line" />
+        </RelativeLayout>
     </android.support.v4.widget.SlidingPaneLayout>
 
 </FrameLayout>

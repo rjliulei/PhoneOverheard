@@ -25,5 +25,7 @@
     <color name="settings_attribute">#ff4d0c14</color>
     <color name="line_green">#FFFAF0</color>
     <color name="xingren_bai">#FFFFCD</color>
+    
+    <color name="devide_line">#CBCED2</color>
 
 </resources>
