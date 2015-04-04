@@ -22,7 +22,6 @@ import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 import cn.linving.girls.Config;
@@ -44,7 +43,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
  * 主导航 界面
  * 
  * @author ving
- *
+ * 
  */
 public class MainFragment extends Fragment implements OnClickListener {
 	public static final String TAG = "MainFragment";
@@ -68,8 +67,6 @@ public class MainFragment extends Fragment implements OnClickListener {
 			fliper_img_four;
 	private TextView fliper_tx_one, fliper_tx_two, fliper_tx_three,
 			fliper_tx_four;
-	private String fliper_str_one, fliper_str_two, fliper_str_three,
-			fliper_str_four;
 	Map<String, String> tagsMap = new HashMap<String, String>();
 	// 高雅
 	private LinearLayout item_gaoyaoyoufan, item_xiezhen, item_qizhi,
@@ -202,17 +199,17 @@ public class MainFragment extends Fragment implements OnClickListener {
 		item_feizhuliu.setOnClickListener(this);
 		item_quanbu = (LinearLayout) currentView.findViewById(R.id.item_quanbu);
 		item_quanbu.setOnClickListener(this);
-		
+
 		// 实例化广告条
 		AdView adView = new AdView(context, AdSize.FIT_SCREEN);
 		// 获取要嵌入广告条的布局
-		LinearLayout adLayout=(LinearLayout)currentView.findViewById(R.id.adLayout);
+		LinearLayout adLayout = (LinearLayout) currentView
+				.findViewById(R.id.adLayout);
 		// 将广告条加入到布局中
 		adLayout.addView(adView);
 
 	}
 
-	
 	int position = 1001;
 
 	private void initData() {
@@ -334,147 +331,56 @@ public class MainFragment extends Fragment implements OnClickListener {
 			startActivity(intent);
 			break;
 		case R.id.item_gaoyaoyoufan:
-			((HomeActivity) getActivity()).getSlidingPaneLayout().closePane();
-			transaction.replace(R.id.slidingpane_content,
-					HomeActivity.fragmentMap.get(GaoyayoufanFragment.TAG));
-			transaction.commit();
-			break;
+
 		case R.id.item_xiezhen:
-			((HomeActivity) getActivity()).getSlidingPaneLayout().closePane();
-			transaction.replace(R.id.slidingpane_content,
-					HomeActivity.fragmentMap.get(XiezhenFragment.TAG));
-			transaction.commit();
-			break;
+
 		case R.id.item_qizhi:
-			((HomeActivity) getActivity()).getSlidingPaneLayout().closePane();
-			transaction.replace(R.id.slidingpane_content,
-					HomeActivity.fragmentMap.get(QizhiFragment.TAG));
-			transaction.commit();
-			break;
+
 		case R.id.item_shishang:
-			((HomeActivity) getActivity()).getSlidingPaneLayout().closePane();
-			transaction.replace(R.id.slidingpane_content,
-					HomeActivity.fragmentMap.get(ShishangFragment.TAG));
-			transaction.commit();
-			break;
+
 		case R.id.item_changfa:
-			((HomeActivity) getActivity()).getSlidingPaneLayout().closePane();
-			transaction.replace(R.id.slidingpane_content,
-					HomeActivity.fragmentMap.get(ChangfaFragment.TAG));
-			transaction.commit();
-			break;
 		case R.id.item_duanfa:
-			((HomeActivity) getActivity()).getSlidingPaneLayout().closePane();
-			transaction.replace(R.id.slidingpane_content,
-					HomeActivity.fragmentMap.get(DuanfaFragment.TAG));
-			transaction.commit();
-			break;
+
 		case R.id.item_xiaoqingxin:
-			((HomeActivity) getActivity()).getSlidingPaneLayout().closePane();
-			transaction.replace(R.id.slidingpane_content,
-					HomeActivity.fragmentMap.get(XiaoQingXinFragment.TAG));
-			transaction.commit();
-			break;
+
 		case R.id.item_tiansuchun:
-			((HomeActivity) getActivity()).getSlidingPaneLayout().closePane();
-			transaction.replace(R.id.slidingpane_content,
-					HomeActivity.fragmentMap.get(TiansuchunFragment.TAG));
-			transaction.commit();
-			break;
+
 		case R.id.item_qingchun:
-			((HomeActivity) getActivity()).getSlidingPaneLayout().closePane();
-			transaction.replace(R.id.slidingpane_content,
-					HomeActivity.fragmentMap.get(QingchunFragment.TAG));
-			transaction.commit();
-			break;
+
 		case R.id.item_xiaohua:
-			((HomeActivity) getActivity()).getSlidingPaneLayout().closePane();
-			transaction.replace(R.id.slidingpane_content,
-					HomeActivity.fragmentMap.get(XiaoHuaFragment.TAG));
-			transaction.commit();
-			break;
+
 		case R.id.item_keai:
-			((HomeActivity) getActivity()).getSlidingPaneLayout().closePane();
-			transaction.replace(R.id.slidingpane_content,
-					HomeActivity.fragmentMap.get(KeaiFragment.TAG));
-			transaction.commit();
-			break;
+
 		case R.id.item_luoli:
-			((HomeActivity) getActivity()).getSlidingPaneLayout().closePane();
-			transaction.replace(R.id.slidingpane_content,
-					HomeActivity.fragmentMap.get(LuoliFragment.TAG));
-			transaction.commit();
-			break;
+
 		case R.id.item_weimei:
-			((HomeActivity) getActivity()).getSlidingPaneLayout().closePane();
-			transaction.replace(R.id.slidingpane_content,
-					HomeActivity.fragmentMap.get(WeimeiFragment.TAG));
-			transaction.commit();
-			break;
+
 		case R.id.item_suyan:
-			((HomeActivity) getActivity()).getSlidingPaneLayout().closePane();
-			transaction.replace(R.id.slidingpane_content,
-					HomeActivity.fragmentMap.get(SuyanFragment.TAG));
-			transaction.commit();
-			break;
+
 		case R.id.item_xingan:
-			((HomeActivity) getActivity()).getSlidingPaneLayout().closePane();
-			transaction.replace(R.id.slidingpane_content,
-					HomeActivity.fragmentMap.get(XingGanFragment.TAG));
-			transaction.commit();
-			break;
+
 		case R.id.item_youhuo:
-			((HomeActivity) getActivity()).getSlidingPaneLayout().closePane();
-			transaction.replace(R.id.slidingpane_content,
-					HomeActivity.fragmentMap.get(YouhuoFragment.TAG));
-			transaction.commit();
-			break;
+
 		case R.id.item_chuangtui:
-			((HomeActivity) getActivity()).getSlidingPaneLayout().closePane();
-			transaction.replace(R.id.slidingpane_content,
-					HomeActivity.fragmentMap.get(ChangTuiFragment.TAG));
-			transaction.commit();
-			break;
+
 		case R.id.item_bijini:
-			((HomeActivity) getActivity()).getSlidingPaneLayout().closePane();
-			transaction.replace(R.id.slidingpane_content,
-					HomeActivity.fragmentMap.get(BijiniFragment.TAG));
-			transaction.commit();
-			break;
+
 		case R.id.item_chemo:
-			((HomeActivity) getActivity()).getSlidingPaneLayout().closePane();
-			transaction.replace(R.id.slidingpane_content,
-					HomeActivity.fragmentMap.get(ChemoFragment.TAG));
-			transaction.commit();
-			break;
+
 		case R.id.item_zuqiubaobei:
-			((HomeActivity) getActivity()).getSlidingPaneLayout().closePane();
-			transaction.replace(R.id.slidingpane_content,
-					HomeActivity.fragmentMap.get(ZuqiubaobeiFragment.TAG));
-			transaction.commit();
-			break;
+
 		case R.id.item_gudianmeinv:
-			((HomeActivity) getActivity()).getSlidingPaneLayout().closePane();
-			transaction.replace(R.id.slidingpane_content,
-					HomeActivity.fragmentMap.get(GudianmeinvFragment.TAG));
-			transaction.commit();
-			break;
+
 		case R.id.item_wangluomeinv:
-			((HomeActivity) getActivity()).getSlidingPaneLayout().closePane();
-			transaction.replace(R.id.slidingpane_content,
-					HomeActivity.fragmentMap.get(WangluomeinvFragment.TAG));
-			transaction.commit();
-			break;
+
 		case R.id.item_feizhuliu:
-			((HomeActivity) getActivity()).getSlidingPaneLayout().closePane();
-			transaction.replace(R.id.slidingpane_content,
-					HomeActivity.fragmentMap.get(FeizhuliuFragment.TAG));
-			transaction.commit();
-			break;
+
 		case R.id.item_quanbu:
 			((HomeActivity) getActivity()).getSlidingPaneLayout().closePane();
 			transaction.replace(R.id.slidingpane_content,
-					HomeActivity.fragmentMap.get(AllmeinviFragment.TAG));
+					((MeiZiCommonFragment) (HomeActivity.fragmentMap
+							.get(MeiZiCommonFragment.TAG))).setTagName(view
+							.getId()));
 			transaction.commit();
 			break;
 		default:
@@ -601,7 +507,8 @@ public class MainFragment extends Fragment implements OnClickListener {
 					R.anim.push_left_out);
 			((HomeActivity) getActivity()).getSlidingPaneLayout().closePane();
 			transaction.replace(R.id.slidingpane_content,
-					new FeizhuliuFragment(tag));
+					((MeiZiCommonFragment) (HomeActivity.fragmentMap
+							.get(MeiZiCommonFragment.TAG))).setTagName(tag));
 			transaction.commit();
 		}
 

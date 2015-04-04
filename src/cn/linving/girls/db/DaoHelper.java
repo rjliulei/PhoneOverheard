@@ -224,7 +224,7 @@ public class DaoHelper<T> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null != entities ? entities : null;
+		return entities;
 
 	}
 

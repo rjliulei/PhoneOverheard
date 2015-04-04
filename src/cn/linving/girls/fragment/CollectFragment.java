@@ -31,12 +31,11 @@ import cn.linving.girls.adapter.ListViewItemAdapter;
 import cn.linving.girls.bean.RowImage;
 import cn.linving.girls.db.DaoHelper;
 
-
 /**
  * 收藏 界面
  * 
  * @author ving
- *
+ * 
  */
 public class CollectFragment extends Fragment implements OnClickListener,
 		IXListViewListener, OnItemClickListener, OnItemLongClickListener {
@@ -200,7 +199,9 @@ public class CollectFragment extends Fragment implements OnClickListener,
 					R.anim.push_left_out);
 			((HomeActivity) getActivity()).getSlidingPaneLayout().closePane();
 			transaction.replace(R.id.slidingpane_content,
-					HomeActivity.fragmentMap.get(AllmeinviFragment.TAG));
+					((MeiZiCommonFragment) (HomeActivity.fragmentMap
+							.get(MeiZiCommonFragment.TAG)))
+							.setTagName(R.id.item_quanbu));
 			transaction.commit();
 			break;
 		default:

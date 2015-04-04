@@ -48,7 +48,7 @@ public class BaseFragment extends Fragment implements OnClickListener,
 		IXListViewListener, OnItemClickListener {
 	private String TAG = "全部";
 	public static final String ROWIMAGE = "rowImage";
-	public boolean CacheFlag = true;
+	private boolean CacheFlag = true;
 	public static final int RequestSuccess = 100;
 	public static final int RequestFail = -100;
 	public static final int RefreshSuccess = 101;
@@ -71,7 +71,7 @@ public class BaseFragment extends Fragment implements OnClickListener,
 	private HttpGetClient mHttpClient;
 	private Params mParams;
 	private int pn = 0;
-	private static final int rn = 30;
+	private static final int rn = 15;
 	private Context mContext;
 	private ListViewItemAdapter mAdapter;
 	private List<RowImage> rowImages = new ArrayList<RowImage>();
@@ -110,6 +110,23 @@ public class BaseFragment extends Fragment implements OnClickListener,
 
 	public BaseFragment() {
 		super();
+	}
+
+	/**
+	 * 
+	 * 设置tag值
+	 * 
+	 * @author liulei
+	 * @date 2015-3-28
+	 * @param tag
+	 *            void
+	 */
+	protected void setTag(String tag) {
+
+		if (!TAG.equals(tag)) {
+			this.TAG = tag;
+			CacheFlag = true;
+		}
 	}
 
 	private void initViews() {
@@ -345,7 +362,6 @@ public class BaseFragment extends Fragment implements OnClickListener,
 			msg.obj = colImages;
 			mHandler.sendMessage(msg);
 			CacheTools.saveHttpCache(MyApplication.CACHE_DIR, TAG, colImages);
-
 		}
 
 		@Override
@@ -453,8 +469,8 @@ public class BaseFragment extends Fragment implements OnClickListener,
 				msg.obj = colImages;
 				mHandler.sendMessage(msg);
 				isCacheSuccess = false;
-
 			}
+
 			CacheFlag = false;
 		} else {
 			Message msg = new Message();

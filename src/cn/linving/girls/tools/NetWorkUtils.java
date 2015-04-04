@@ -26,7 +26,7 @@ public class NetWorkUtils {
 	public NetWorkState getConnectState() {
 		ConnectivityManager manager = (ConnectivityManager) mContext
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
-		manager.getActiveNetworkInfo();
+//		manager.getActiveNetworkInfo();
 		wifiState = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
 				.getState();
 		mobileState = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)

@@ -88,7 +88,7 @@ public class MenuFragment extends Fragment implements OnClickListener {
 		case R.id.bt_xiaoqingxin:
 			((HomeActivity) getActivity()).getSlidingPaneLayout().closePane();
 			transaction.replace(R.id.slidingpane_content,
-					HomeActivity.fragmentMap.get(AllmeinviFragment.TAG));
+					HomeActivity.fragmentMap.get(MeiZiCommonFragment.TAG));
 			transaction.commit();
 			break;
 		case R.id.bt_collect:

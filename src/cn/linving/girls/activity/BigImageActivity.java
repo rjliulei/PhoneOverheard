@@ -2,6 +2,7 @@ package cn.linving.girls.activity;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import net.youmi.android.banner.AdSize;
 import net.youmi.android.banner.AdView;
@@ -34,7 +35,7 @@ import cn.linving.girls.Config;
 import cn.linving.girls.MyApplication;
 import cn.linving.girls.bean.RowImage;
 import cn.linving.girls.db.DaoHelper;
-import cn.linving.girls.fragment.XiaoQingXinFragment;
+import cn.linving.girls.fragment.BaseFragment;
 import cn.linving.girls.tools.MySharePreference;
 import cn.linving.girls.tools.BitmapTools;
 import cn.linving.girls.tools.MyLog;
@@ -116,7 +117,7 @@ public class BigImageActivity extends BaseActivity implements OnClickListener,
 
 	private void initData() {
 		mRowImage = (RowImage) getIntent().getExtras().get(
-				XiaoQingXinFragment.ROWIMAGE);
+				BaseFragment.ROWIMAGE);
 		rowImageDao = new DaoHelper<RowImage>(this, RowImage.class);
 		sharePic = "image_" + System.currentTimeMillis();
 		isCollect = isCollect(mRowImage);
@@ -292,7 +293,9 @@ public class BigImageActivity extends BaseActivity implements OnClickListener,
 	}
 
 	private boolean isCollect(RowImage rowImage) {
-		if ((rowImageDao.queryForEq("id", rowImage.getId()).size()) >= 1) {
+		
+		List<RowImage> list = rowImageDao.queryForEq("id", rowImage.getId());
+		if ((list != null) && (list.size() >= 1)) {
 
 			return true;
 		} else {
