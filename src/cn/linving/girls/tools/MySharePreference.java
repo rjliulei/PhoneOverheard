@@ -3,7 +3,7 @@ package cn.linving.girls.tools;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import com.phoneoverheard.phonne.R;
+import com.phoneoverheard.phone.R;
 
 /**
  * 配置项操作类

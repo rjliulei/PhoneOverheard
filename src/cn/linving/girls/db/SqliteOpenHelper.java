@@ -10,13 +10,14 @@ import cn.linving.girls.tools.MyLog;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import com.phoneoverheard.bean.LocNormal;
 
 public class SqliteOpenHelper extends OrmLiteSqliteOpenHelper {
 	private final String TAG = this.getClass().getSimpleName();
 	private static SqliteOpenHelper instance;
 
 	/* 在此声明实体类 */
-	private Class<?>[] classes = { RowImage.class };
+	private Class<?>[] classes = { RowImage.class, LocNormal.class };
 
 	public SqliteOpenHelper(Context context) {
 		super(context, DBConfig.getFilePath(), null, DBConfig.DATABASE.VERSION);

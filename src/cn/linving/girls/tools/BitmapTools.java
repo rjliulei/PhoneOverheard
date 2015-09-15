@@ -23,7 +23,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import com.phoneoverheard.phonne.R;
+import com.phoneoverheard.phone.R;
 
 /**
  * 

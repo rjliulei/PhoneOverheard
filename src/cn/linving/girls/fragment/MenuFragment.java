@@ -16,7 +16,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import com.phoneoverheard.phonne.R;
+import com.phoneoverheard.phone.R;
 import cn.linving.girls.activity.HomeActivity;
 import cn.linving.girls.activity.SettingActivity;
 import cn.linving.girls.tools.MyLog;

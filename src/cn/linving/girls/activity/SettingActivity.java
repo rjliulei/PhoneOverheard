@@ -24,7 +24,7 @@ import cn.linving.girls.tools.CacheTools;
 import cn.linving.girls.tools.MyLog;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.phoneoverheard.phonne.R;
+import com.phoneoverheard.phone.R;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.fb.FeedbackAgent;
 import com.umeng.update.UmengUpdateAgent;

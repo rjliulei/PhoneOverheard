@@ -3,7 +3,7 @@ package cn.linving.girls.adapter;
 import java.util.List;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.phoneoverheard.phonne.R;
+import com.phoneoverheard.phone.R;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -1,6 +1,6 @@
 package cn.linving.girls.fragment;
 
-import com.phoneoverheard.phonne.R;
+import com.phoneoverheard.phone.R;
 
 public class MeiZiCommonFragment extends BaseFragment {
 

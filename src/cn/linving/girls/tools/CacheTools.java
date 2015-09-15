@@ -6,8 +6,6 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-
 import android.content.Context;
 
 /**

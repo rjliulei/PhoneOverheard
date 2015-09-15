@@ -1,6 +1,6 @@
 package cn.linving.girls.activity;
 
-import com.phoneoverheard.phonne.R;
+import com.phoneoverheard.phone.R;
 
 import android.content.Intent;
 import android.os.Bundle;

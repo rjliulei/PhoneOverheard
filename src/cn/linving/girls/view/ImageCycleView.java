@@ -2,7 +2,7 @@ package cn.linving.girls.view;
 
 import java.util.ArrayList;
 
-import com.phoneoverheard.phonne.R;
+import com.phoneoverheard.phone.R;
 
 import android.content.Context;
 import android.os.Handler;

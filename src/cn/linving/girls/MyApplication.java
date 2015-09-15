@@ -10,18 +10,21 @@ import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.util.Log;
 
+
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.phoneoverheard.phonne.R;
+import com.phoneoverheard.phone.R;
+import com.phoneoverheard.util.LocationManagerUtils;
 
 public class MyApplication extends Application {
 	public static String CACHE_DIR = "";
 	public static Context AppContext;
 	// 成功加载广告数
 	private static List<Activity> activitys = new LinkedList<Activity>();
+	private LocationManagerUtils locationManager;
 
 	public List<Activity> getActivitys() {
 		return activitys;
@@ -78,11 +81,16 @@ public class MyApplication extends Application {
 
 		ImageLoader.getInstance().init(config);
 		
+		locationManager = new LocationManagerUtils(AppContext);
+		locationManager.initLocOptionNormal();
+		locationManager.start();
+		
 		super.onCreate();
 	}
 
 	@Override
 	public void onTerminate() {
+		locationManager.stop();
 		super.onTerminate();
 	}
 

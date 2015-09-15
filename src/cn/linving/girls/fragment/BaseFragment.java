@@ -23,7 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import cn.linving.girls.Config;
 import cn.linving.girls.MyApplication;
-import com.phoneoverheard.phonne.R;
+import com.phoneoverheard.phone.R;
 import com.phoneoverheard.view.waterfalllistview.WaterFallListView;
 import com.phoneoverheard.view.waterfalllistview.WaterFallListView.IXListViewListener;
 import com.phoneoverheard.view.waterfalllistview.internal.PLA_AdapterView;

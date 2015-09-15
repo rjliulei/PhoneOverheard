@@ -26,7 +26,7 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 import cn.linving.girls.Config;
 import cn.linving.girls.MyApplication;
-import com.phoneoverheard.phonne.R;
+import com.phoneoverheard.phone.R;
 import cn.linving.girls.activity.HomeActivity;
 import cn.linving.girls.activity.SettingActivity;
 import cn.linving.girls.bean.ColumnImages;

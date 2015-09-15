@@ -9,7 +9,7 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.View;
-import com.phoneoverheard.phonne.R;
+import com.phoneoverheard.phone.R;
 
 
 /**

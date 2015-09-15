@@ -20,7 +20,7 @@ import cn.linving.girls.fragment.MainFragment;
 import cn.linving.girls.fragment.MeiZiCommonFragment;
 import cn.linving.girls.fragment.MenuFragment;
 
-import com.phoneoverheard.phonne.R;
+import com.phoneoverheard.phone.R;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengUpdateAgent;
 

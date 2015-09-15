@@ -47,7 +47,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.android.volley.toolbox.Volley;
-import com.phoneoverheard.phonne.R;
+import com.phoneoverheard.phone.R;
 import com.umeng.analytics.MobclickAgent;
 
 public class BigImageActivity extends BaseActivity implements OnClickListener,
