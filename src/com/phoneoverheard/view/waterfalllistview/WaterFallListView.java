@@ -19,7 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.Scroller;
 import android.widget.TextView;
 
-import com.phoneoverheard.phonne.R;
+import com.phoneoverheard.phone.R;
 import com.phoneoverheard.view.waterfalllistview.internal.PLA_AbsListView;
 import com.phoneoverheard.view.waterfalllistview.internal.PLA_AbsListView.OnScrollListener;
 

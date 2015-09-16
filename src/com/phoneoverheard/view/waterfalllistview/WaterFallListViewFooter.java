@@ -6,7 +6,7 @@
  */
 package com.phoneoverheard.view.waterfalllistview;
 
-import com.phoneoverheard.phonne.R;
+import com.phoneoverheard.phone.R;
 
 import android.content.Context;
 import android.util.AttributeSet;

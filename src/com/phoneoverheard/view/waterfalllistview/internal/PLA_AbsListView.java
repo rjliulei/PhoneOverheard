@@ -19,7 +19,7 @@ package com.phoneoverheard.view.waterfalllistview.internal;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.phoneoverheard.phonne.R;
+import com.phoneoverheard.phone.R;
 
 import android.content.Context;
 import android.content.res.TypedArray;
