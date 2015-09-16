@@ -30,6 +30,9 @@ public class LocNormal extends BmobObject {
 	private double lat;
 	@DatabaseField
 	private String time;
+	/** 
+	 * 上传状态，0未上传，1已上传，2上传中
+	*/ 
 	@DatabaseField
 	private int state;
 

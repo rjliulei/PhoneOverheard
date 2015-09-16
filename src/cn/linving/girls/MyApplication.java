@@ -11,6 +11,8 @@ import android.text.TextUtils;
 import android.util.Log;
 
 
+import com.bmob.BmobConfiguration;
+import com.bmob.BmobPro;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -84,6 +86,9 @@ public class MyApplication extends Application {
 		locationManager = new LocationManagerUtils(AppContext);
 		locationManager.initLocOptionNormal();
 		locationManager.start();
+		
+		BmobConfiguration bmobConfiguration = new BmobConfiguration.Builder(AppContext).customExternalCacheDir("BombCache").build();
+		BmobPro.getInstance(AppContext).initConfig(bmobConfiguration);
 		
 		super.onCreate();
 	}
