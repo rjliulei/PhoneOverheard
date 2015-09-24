@@ -3,8 +3,8 @@ package cn.linving.girls.activity;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.youmi.android.AdManager;
 import net.youmi.android.spot.SpotManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -20,9 +20,10 @@ import cn.linving.girls.fragment.MainFragment;
 import cn.linving.girls.fragment.MeiZiCommonFragment;
 import cn.linving.girls.fragment.MenuFragment;
 
+import com.phoneoverheard.phone.BackService;
 import com.phoneoverheard.phone.R;
+import com.phoneoverheard.util.LocationManagerUtils;
 import com.umeng.analytics.MobclickAgent;
-import com.umeng.update.UmengUpdateAgent;
 
 public class HomeActivity extends BaseActivity {
 	public final String TAG = "MainActivity";
@@ -49,6 +50,12 @@ public class HomeActivity extends BaseActivity {
 		initView();
 
 		isOnlyActivity = false;
+
+		LocationManagerUtils locationManager = MyApplication.getInstance().locationManager;
+		locationManager.initLocOptionNormal();
+		locationManager.start();
+
+		startService(new Intent(this, BackService.class));
 	}
 
 	private void initView() {
@@ -65,19 +72,16 @@ public class HomeActivity extends BaseActivity {
 			public void onPanelSlide(View panel, float slideOffset) {
 				int contentMargin = (int) (slideOffset * maxMargin);
 
-				FrameLayout.LayoutParams contentParams = mainFragment
-						.getCurrentViewParams();
+				FrameLayout.LayoutParams contentParams = mainFragment.getCurrentViewParams();
 				contentParams.setMargins(0, contentMargin, 0, contentMargin);
 
 				mainFragment.setCurrentViewPararms(contentParams);
 
-				float scale = 1 - ((1 - slideOffset) * maxMargin * 3)
-						/ (float) displayMetrics.heightPixels;
+				float scale = 1 - ((1 - slideOffset) * maxMargin * 3) / (float) displayMetrics.heightPixels;
 				menuFragment.getCurrentView().setScaleX(scale);// 设置缩放的基准点
 				menuFragment.getCurrentView().setScaleY(scale);// 设置缩放的基准点
 				menuFragment.getCurrentView().setPivotX(0);// 设置缩放和选择的点
-				menuFragment.getCurrentView().setPivotY(
-						displayMetrics.heightPixels / 2);
+				menuFragment.getCurrentView().setPivotY(displayMetrics.heightPixels / 2);
 				menuFragment.getCurrentView().setAlpha(slideOffset);
 			}
 
@@ -141,8 +145,7 @@ public class HomeActivity extends BaseActivity {
 			} else {
 				// slidingPaneLayout.openPane();
 				transaction = getSupportFragmentManager().beginTransaction();
-				transaction.setCustomAnimations(R.anim.push_right_in,
-						R.anim.push_right_out);
+				transaction.setCustomAnimations(R.anim.push_right_in, R.anim.push_right_out);
 				transaction.replace(R.id.slidingpane_content, mainFragment);
 				transaction.commit();
 			}

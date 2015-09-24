@@ -2,6 +2,7 @@ package cn.linving.girls.activity;
 
 import com.umeng.analytics.MobclickAgent;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Window;
@@ -9,6 +10,7 @@ import android.view.Window;
 public class BaseActivity extends FragmentActivity {
 
 	private String TAG;
+	protected Context context;
 
 	/**
 	 * umeng页面统计策略： Activity：统计时长和页面 FragmentActivity +
@@ -21,6 +23,7 @@ public class BaseActivity extends FragmentActivity {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		TAG = this.getClass().getSimpleName();
+		context = this;
 		super.onCreate(arg0);
 	}
 

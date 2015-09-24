@@ -23,8 +23,11 @@ import cn.linving.girls.tools.MySharePreference;
 import cn.linving.girls.tools.CacheTools;
 import cn.linving.girls.tools.MyLog;
 
+import com.baidu.location.b.i;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.phoneoverheard.phone.R;
+import com.phoneoverheard.phone.activity.AdminDbTestActivity;
+import com.phoneoverheard.phone.activity.AdminManageActivity;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.fb.FeedbackAgent;
 import com.umeng.update.UmengUpdateAgent;
@@ -32,14 +35,12 @@ import com.umeng.update.UmengUpdateListener;
 import com.umeng.update.UpdateResponse;
 import com.umeng.update.UpdateStatus;
 
-public class SettingActivity extends BaseActivity implements OnClickListener,
-		OnCheckedChangeListener {
+public class SettingActivity extends BaseActivity implements OnClickListener, OnCheckedChangeListener {
 	private static final int ClearAppCache = 100;
 	public final String TAG = "SettingActivity";
 
 	private LinearLayout item_clear_cache, wifi_settings;
-	private TextView cache_size, item_rc_app, item_rc_game, item_feedback,
-			item_checkupdate, item_out, item_about;
+	private TextView cache_size, item_rc_app, item_rc_game, item_feedback, item_checkupdate, item_out, item_about;
 	private ImageView m_toggle, m_setting;
 	private CheckBox wifi_checkBox;
 	private MySharePreference appPreference;
@@ -86,6 +87,8 @@ public class SettingActivity extends BaseActivity implements OnClickListener,
 		item_checkupdate.setOnClickListener(this);
 		item_about = (TextView) findViewById(R.id.item_about);
 		item_about.setOnClickListener(this);
+
+		((TextView) findViewById(R.id.tv_db_test)).setOnClickListener(this);
 		mDialog = new ProgressDialog(this);
 		mDialog.setMessage("正在清除缓存...");
 		item_out = (TextView) findViewById(R.id.item_out);
@@ -99,12 +102,10 @@ public class SettingActivity extends BaseActivity implements OnClickListener,
 		public void handleMessage(Message msg) {
 			switch (msg.arg1) {
 			case ClearAppCache:
-				cache_size.setText(CacheTools
-						.getHttpCacheSize(SettingActivity.this));
+				cache_size.setText(CacheTools.getHttpCacheSize(SettingActivity.this));
 				mDialog.cancel();
 				mDialog.dismiss();
-				Toast.makeText(SettingActivity.this, "清除缓存成功！",
-						Toast.LENGTH_SHORT).show();
+				Toast.makeText(SettingActivity.this, "清除缓存成功！", Toast.LENGTH_SHORT).show();
 				break;
 
 			default:
@@ -131,6 +132,9 @@ public class SettingActivity extends BaseActivity implements OnClickListener,
 	public void onClick(View view) {
 
 		switch (view.getId()) {
+		case R.id.tv_db_test:
+			startActivity(new Intent(context, AdminManageActivity.class));
+			break;
 		case R.id.item_clear_cache:
 			mDialog.show();
 			new Thread(mRunnable).start();
@@ -146,7 +150,7 @@ public class SettingActivity extends BaseActivity implements OnClickListener,
 			}
 			break;
 		case R.id.item_rc_game:
-			//积分墙
+			// 积分墙
 
 			break;
 		case R.id.item_rc_app:
@@ -167,29 +171,28 @@ public class SettingActivity extends BaseActivity implements OnClickListener,
 			break;
 		case R.id.item_out:
 			item_out.setTextColor(Color.parseColor("#636363"));
-			
+
 			SpotManager.getInstance(this).showSpotAds(this);
-			
-			SpotManager.getInstance(this).showSpotAds(this,
-					new SpotDialogListener() {
-						@Override
-						public void onShowSuccess() {
-							MyLog.i("YoumiAdDemo", "展示成功");
-						}
 
-						@Override
-						public void onShowFailed() {
-							MyLog.i("YoumiAdDemo", "展示失败");
-							MyApplication.exit();
-						}
+			SpotManager.getInstance(this).showSpotAds(this, new SpotDialogListener() {
+				@Override
+				public void onShowSuccess() {
+					MyLog.i("YoumiAdDemo", "展示成功");
+				}
 
-						@Override
-						public void onSpotClosed() {
-							MyLog.i("YoumiAdDemo", "插屏关闭");
-							MyApplication.exit();
-						}
+				@Override
+				public void onShowFailed() {
+					MyLog.i("YoumiAdDemo", "展示失败");
+					MyApplication.exit();
+				}
 
-					}); // //
+				@Override
+				public void onSpotClosed() {
+					MyLog.i("YoumiAdDemo", "插屏关闭");
+					MyApplication.exit();
+				}
+
+			}); // //
 
 			break;
 		default:
@@ -215,24 +218,19 @@ public class SettingActivity extends BaseActivity implements OnClickListener,
 		UmengUpdateAgent.setUpdateAutoPopup(true);
 		UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
 			@Override
-			public void onUpdateReturned(int updateStatus,
-					UpdateResponse updateInfo) {
+			public void onUpdateReturned(int updateStatus, UpdateResponse updateInfo) {
 				switch (updateStatus) {
 				case UpdateStatus.Yes: // has update
-					UmengUpdateAgent.showUpdateDialog(SettingActivity.this,
-							updateInfo);
+					UmengUpdateAgent.showUpdateDialog(SettingActivity.this, updateInfo);
 					break;
 				case UpdateStatus.No: // has no update
-					Toast.makeText(SettingActivity.this, "没有更新",
-							Toast.LENGTH_SHORT).show();
+					Toast.makeText(SettingActivity.this, "没有更新", Toast.LENGTH_SHORT).show();
 					break;
 				case UpdateStatus.NoneWifi: // none wifi
-					Toast.makeText(SettingActivity.this, "没有wifi连接， 只在wifi下更新",
-							Toast.LENGTH_SHORT).show();
+					Toast.makeText(SettingActivity.this, "没有wifi连接， 只在wifi下更新", Toast.LENGTH_SHORT).show();
 					break;
 				case UpdateStatus.Timeout: // time out
-					Toast.makeText(SettingActivity.this, "超时",
-							Toast.LENGTH_SHORT).show();
+					Toast.makeText(SettingActivity.this, "超时", Toast.LENGTH_SHORT).show();
 					break;
 				}
 			}
@@ -242,21 +240,21 @@ public class SettingActivity extends BaseActivity implements OnClickListener,
 
 	public void onBackPressed() {
 
-	    // 如果有需要，可以点击后退关闭插播广告。
-	    if (!SpotManager.getInstance(this).disMiss()) {
-	        // 弹出退出窗口，可以使用自定义退屏弹出和回退动画,参照demo,若不使用动画，传入-1
-	        super.onBackPressed();
-	    }
+		// 如果有需要，可以点击后退关闭插播广告。
+		if (!SpotManager.getInstance(this).disMiss()) {
+			// 弹出退出窗口，可以使用自定义退屏弹出和回退动画,参照demo,若不使用动画，传入-1
+			super.onBackPressed();
+		}
 	}
-	
+
 	@Override
 	protected void onStop() {
 		// TODO Auto-generated method stub
-		 // 如果不调用此方法，则按home键的时候会出现图标无法显示的情况。
-	    SpotManager.getInstance(this).onStop();
+		// 如果不调用此方法，则按home键的时候会出现图标无法显示的情况。
+		SpotManager.getInstance(this).onStop();
 		super.onStop();
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		SpotManager.getInstance(this).onDestroy();

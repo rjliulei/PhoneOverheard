@@ -8,8 +8,6 @@ import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
-import android.util.Log;
-
 
 import com.bmob.BmobConfiguration;
 import com.bmob.BmobPro;
@@ -26,7 +24,8 @@ public class MyApplication extends Application {
 	public static Context AppContext;
 	// 成功加载广告数
 	private static List<Activity> activitys = new LinkedList<Activity>();
-	private LocationManagerUtils locationManager;
+	private static MyApplication instance;
+	public LocationManagerUtils locationManager;
 
 	public List<Activity> getActivitys() {
 		return activitys;
@@ -44,17 +43,15 @@ public class MyApplication extends Application {
 
 	@Override
 	public void onCreate() {
-		DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
-				.showImageForEmptyUri(R.drawable.loading)
-				.bitmapConfig(Bitmap.Config.ALPHA_8).considerExifParams(true)
-				.showImageOnFail(R.drawable.loaded_fail).cacheInMemory(true)
-				.cacheOnDisk(true).build();
-		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
-				getApplicationContext())
-				.discCacheFileNameGenerator(new Md5FileNameGenerator())
-				.defaultDisplayImageOptions(defaultOptions)
-				.memoryCache(new WeakMemoryCache())
-				.discCacheSize(50 * 1024 * 1024)//
+
+		instance = this;
+
+		DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().showImageForEmptyUri(R.drawable.loading)
+				.bitmapConfig(Bitmap.Config.ALPHA_8).considerExifParams(true).showImageOnFail(R.drawable.loaded_fail)
+				.cacheInMemory(true).cacheOnDisk(true).build();
+		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
+				.discCacheFileNameGenerator(new Md5FileNameGenerator()).defaultDisplayImageOptions(defaultOptions)
+				.memoryCache(new WeakMemoryCache()).discCacheSize(50 * 1024 * 1024)//
 				.discCacheFileCount(3000)// 缓存一百张图片
 				.writeDebugLogs().build();
 		CACHE_DIR = getApplicationContext().getFilesDir().getPath();
@@ -82,15 +79,23 @@ public class MyApplication extends Application {
 		// .build();
 
 		ImageLoader.getInstance().init(config);
-		
+
 		locationManager = new LocationManagerUtils(AppContext);
-		locationManager.initLocOptionNormal();
-		locationManager.start();
-		
-		BmobConfiguration bmobConfiguration = new BmobConfiguration.Builder(AppContext).customExternalCacheDir("BombCache").build();
+
+		BmobConfiguration bmobConfiguration = new BmobConfiguration.Builder(AppContext).customExternalCacheDir(
+				"BombCache").build();
 		BmobPro.getInstance(AppContext).initConfig(bmobConfiguration);
-		
+
 		super.onCreate();
+	}
+
+	/**
+	 * 获取唯一的单例Application
+	 * 
+	 * @return
+	 */
+	public static MyApplication getInstance() {
+		return instance;
 	}
 
 	@Override
@@ -104,7 +109,7 @@ public class MyApplication extends Application {
 		super.onLowMemory();
 	}
 
-	/**{"device_id":"869451015663771","mac":"78:f5:fd:63:65:47"}*/
+	/** {"device_id":"869451015663771","mac":"78:f5:fd:63:65:47"} */
 	public static String getDeviceInfo(Context context) {
 		try {
 			org.json.JSONObject json = new org.json.JSONObject();
@@ -124,8 +129,7 @@ public class MyApplication extends Application {
 			}
 
 			if (TextUtils.isEmpty(device_id)) {
-				device_id = android.provider.Settings.Secure.getString(
-						context.getContentResolver(),
+				device_id = android.provider.Settings.Secure.getString(context.getContentResolver(),
 						android.provider.Settings.Secure.ANDROID_ID);
 			}
 

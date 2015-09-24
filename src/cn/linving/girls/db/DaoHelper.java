@@ -15,8 +15,8 @@ import com.j256.ormlite.stmt.Where;
 
 public class DaoHelper<T> {
 	protected final String TAG = this.getClass().getSimpleName();
-	private static SqliteOpenHelper db;
-	private Dao<T, Long> dao;
+	protected static SqliteOpenHelper db;
+	protected Dao<T, Long> dao;
 
 	@SuppressWarnings("unchecked")
 	public DaoHelper(Context context, Class<T> clazz) {
@@ -27,8 +27,8 @@ public class DaoHelper<T> {
 			e.printStackTrace();
 		}
 	}
-	
-	public Dao<T, Long> getDao(){
+
+	public Dao<T, Long> getDao() {
 		return dao;
 	}
 
@@ -243,23 +243,19 @@ public class DaoHelper<T> {
 	public List<T> queryPaging(long page, long pageSize) {
 		List<T> entities = null;
 		try {
-			entities = query(dao.queryBuilder().limit(pageSize)
-					.offset(page * pageSize).prepare());
+			entities = query(dao.queryBuilder().limit(pageSize).offset(page * pageSize).prepare());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null != entities ? entities : null;
 	}
 
-	public List<T> getQueryList(long start, long end, String content1,
-			String content2, String content3, String flag) {
+	public List<T> getQueryList(long start, long end, String content1, String content2, String content3, String flag) {
 		List<T> list = new ArrayList<T>();
 		try {
 			if ("workoderfo".equalsIgnoreCase(flag)) {
-				Where<T, Long> where = dao.queryBuilder().limit(end)
-						.offset(start * end).orderBy("wonum", false).where()
-						.eq("assetnum", content1).and().eq("wonum", content2)
-						.and().eq("udparent_f", content3);
+				Where<T, Long> where = dao.queryBuilder().limit(end).offset(start * end).orderBy("wonum", false)
+						.where().eq("assetnum", content1).and().eq("wonum", content2).and().eq("udparent_f", content3);
 				list = dao.query(where.prepare());
 			}
 
@@ -270,22 +266,18 @@ public class DaoHelper<T> {
 		return null;
 	}
 
-	public List<T> getQueryList(long start, long end, String content1,
-			String content2, String flag) {
+	public List<T> getQueryList(long start, long end, String content1, String content2, String flag) {
 		List<T> list = new ArrayList<T>();
 		try {
 
 			if ("fospec".equalsIgnoreCase(flag)) {
-				Where<T, Long> where = dao.queryBuilder()
-						.orderBy("wonum", false).where().eq("wonum", content1)
-						.and().eq("parentwonum", content2);
+				Where<T, Long> where = dao.queryBuilder().orderBy("wonum", false).where().eq("wonum", content1).and()
+						.eq("parentwonum", content2);
 				list = dao.query(where.prepare());
 
 			} else if ("workoderfo".equalsIgnoreCase(flag)) {
-				Where<T, Long> where = dao.queryBuilder().limit(end)
-						.offset(start * end).orderBy("wonum", false).where()
-						.eq("assetnum", content1).and()
-						.eq("udparent_f", content2);
+				Where<T, Long> where = dao.queryBuilder().limit(end).offset(start * end).orderBy("wonum", false)
+						.where().eq("assetnum", content1).and().eq("udparent_f", content2);
 				list = dao.query(where.prepare());
 			}
 
@@ -296,75 +288,62 @@ public class DaoHelper<T> {
 		return null;
 	}
 
-	public List<T> getQueryList(long start, long end, String content,
-			String flag) {
+	public List<T> getQueryList(long start, long end, String content, String flag) {
 		List<T> list = new ArrayList<T>();
 		try {
 			if ("asset".equalsIgnoreCase(flag)) {
-				Where<T, Long> where = dao.queryBuilder().limit(end)
-						.offset(start * end).orderBy("assetnum", true).where()
-						.eq("location", content);
+				Where<T, Long> where = dao.queryBuilder().limit(end).offset(start * end).orderBy("assetnum", true)
+						.where().eq("location", content);
 				list = dao.query(where.prepare());
 			} else if ("asset_orderbyall".equalsIgnoreCase(flag)) {
-				QueryBuilder<T, Long> where = dao.queryBuilder().limit(end)
-						.offset(start * end).orderBy("assetnum", true);
+				QueryBuilder<T, Long> where = dao.queryBuilder().limit(end).offset(start * end)
+						.orderBy("assetnum", true);
 				list = dao.query(where.prepare());
 			} else if ("asset_like".equalsIgnoreCase(flag)) {
-				Where<T, Long> where = dao.queryBuilder().limit(end)
-						.offset(start * end).orderBy("assetnum", true).where()
-						.like("location", content + "%");
+				Where<T, Long> where = dao.queryBuilder().limit(end).offset(start * end).orderBy("assetnum", true)
+						.where().like("location", content + "%");
 				list = dao.query(where.prepare());
 			} else if ("failureclass".equalsIgnoreCase(flag)) {
-				QueryBuilder<T, Long> where = dao.queryBuilder().limit(end)
-						.offset(start * end).orderBy("failurecode", true);
+				QueryBuilder<T, Long> where = dao.queryBuilder().limit(end).offset(start * end)
+						.orderBy("failurecode", true);
 				list = dao.query(where.prepare());
 			} else if ("sfailureclass".equalsIgnoreCase(flag)) {
-				Where<T, Long> where = dao.queryBuilder().limit(end)
-						.offset(start * end).orderBy("failurecode", true)
+				Where<T, Long> where = dao.queryBuilder().limit(end).offset(start * end).orderBy("failurecode", true)
 						.where().eq("actype", content).or().eq("actype", "");
 				list = dao.query(where.prepare());
 			} else if ("workordermo".equalsIgnoreCase(flag)) {
-				QueryBuilder<T, Long> where = dao.queryBuilder().limit(end)
-						.offset(start * end).orderBy("workorderid", true);
+				QueryBuilder<T, Long> where = dao.queryBuilder().limit(end).offset(start * end)
+						.orderBy("workorderid", true);
 				list = dao.query(where.prepare());
 			} else if ("assetsepc".equalsIgnoreCase(flag)) {
-				Where<T, Long> where = dao.queryBuilder().limit(end)
-						.offset(start * end).orderBy("assetnum", true).where()
-						.eq("assetnum", content);
+				Where<T, Long> where = dao.queryBuilder().limit(end).offset(start * end).orderBy("assetnum", true)
+						.where().eq("assetnum", content);
 				list = dao.query(where.prepare());
 			} else if ("assetscan".equalsIgnoreCase(flag)) {
-				Where<T, Long> where = dao.queryBuilder().limit(end)
-						.offset(start * end).orderBy("assetnum", true).where()
-						.eq("assetnum", content);
+				Where<T, Long> where = dao.queryBuilder().limit(end).offset(start * end).orderBy("assetnum", true)
+						.where().eq("assetnum", content);
 				list = dao.query(where.prepare());
 			} else if ("tasklocation".equalsIgnoreCase(flag)) {
-				Where<T, Long> where = dao.queryBuilder()
-						.orderBy("location", true).where().eq("wonum", content);
+				Where<T, Long> where = dao.queryBuilder().orderBy("location", true).where().eq("wonum", content);
 				list = dao.query(where.prepare());
 			} else if ("workoderfo".equalsIgnoreCase(flag)) {
-				Where<T, Long> where = dao.queryBuilder().limit(end)
-						.offset(start * end).orderBy("wonum", false).where()
-						.eq("assetnum", content);
+				Where<T, Long> where = dao.queryBuilder().limit(end).offset(start * end).orderBy("wonum", false)
+						.where().eq("assetnum", content);
 				list = dao.query(where.prepare());
 			} else if ("fospec".equalsIgnoreCase(flag)) {
-				Where<T, Long> where = dao.queryBuilder()
-						.orderBy("wonum", false).where().eq("wonum", content);
+				Where<T, Long> where = dao.queryBuilder().orderBy("wonum", false).where().eq("wonum", content);
 				list = dao.query(where.prepare());
 			} else if ("workorderfail".equalsIgnoreCase(flag)) {
-				QueryBuilder<T, Long> where = dao.queryBuilder().limit(end)
-						.offset(start * end).orderBy("wonum", false);
+				QueryBuilder<T, Long> where = dao.queryBuilder().limit(end).offset(start * end).orderBy("wonum", false);
 				list = dao.query(where.prepare());
 			} else if ("location_orderby".equalsIgnoreCase(flag)) {
-				QueryBuilder<T, Long> where = dao.queryBuilder().orderBy(
-						"location", true);
+				QueryBuilder<T, Long> where = dao.queryBuilder().orderBy("location", true);
 				list = dao.query(where.prepare());
 			} else if ("workfoup".equalsIgnoreCase(flag)) {
-				Where<T, Long> where = dao.queryBuilder().where()
-						.eq("udparent_f", content);
+				Where<T, Long> where = dao.queryBuilder().where().eq("udparent_f", content);
 				list = dao.query(where.prepare());
 			} else if ("fospecup".equalsIgnoreCase(flag)) {
-				Where<T, Long> where = dao.queryBuilder().where()
-						.eq("parentwonum", content);
+				Where<T, Long> where = dao.queryBuilder().where().eq("parentwonum", content);
 				list = dao.query(where.prepare());
 			}
 

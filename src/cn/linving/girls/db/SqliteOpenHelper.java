@@ -14,18 +14,16 @@ import com.phoneoverheard.bean.LocNormal;
 
 public class SqliteOpenHelper extends OrmLiteSqliteOpenHelper {
 	private final String TAG = this.getClass().getSimpleName();
-	private static SqliteOpenHelper instance;
 
 	/* 在此声明实体类 */
-	private Class<?>[] classes = { RowImage.class, LocNormal.class };
+	public static final Class<?>[] classes = { RowImage.class, LocNormal.class };
 
 	public SqliteOpenHelper(Context context) {
-		super(context, DBConfig.getFilePath(), null, DBConfig.DATABASE.VERSION);
+		super(context, DBConfig.DATABASE.PATH, null, DBConfig.DATABASE.VERSION);
 	}
 
 	@Override
-	public void onCreate(SQLiteDatabase database,
-			ConnectionSource connectionSource) {
+	public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
 		try {
 			for (Class<?> clazz : classes) {
 				TableUtils.createTableIfNotExists(connectionSource, clazz);
@@ -37,16 +35,14 @@ public class SqliteOpenHelper extends OrmLiteSqliteOpenHelper {
 	}
 
 	@Override
-	public void onUpgrade(SQLiteDatabase database,
-			ConnectionSource connectionSource, int oldVer, int newVer) {
+	public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVer, int newVer) {
 		try {
 			for (Class<?> clazz : classes) {
 				TableUtils.dropTable(connectionSource, clazz, true);
 			}
 			onCreate(database, connectionSource);
 		} catch (SQLException e) {
-			MyLog.i(TAG, "Unable to upgrade database from version " + oldVer
-					+ " to new " + newVer);
+			MyLog.i(TAG, "Unable to upgrade database from version " + oldVer + " to new " + newVer);
 		}
 	}
 

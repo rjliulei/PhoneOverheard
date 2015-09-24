@@ -1,9 +1,9 @@
 package com.phoneoverheard.bean;
 
-import com.j256.ormlite.field.DatabaseField;
-
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobGeoPoint;
+
+import com.j256.ormlite.field.DatabaseField;
 
 /**
  * 常态定位表及交互类
@@ -22,7 +22,7 @@ public class LocNormal extends BmobObject {
 	private BmobGeoPoint point;
 	private String userId;
 
-	@DatabaseField(id = true)
+	@DatabaseField(generatedId = true)
 	private int id;
 	@DatabaseField
 	private double lng;
@@ -30,9 +30,9 @@ public class LocNormal extends BmobObject {
 	private double lat;
 	@DatabaseField
 	private String time;
-	/** 
+	/**
 	 * 上传状态，0未上传，1已上传，2上传中
-	*/ 
+	 */
 	@DatabaseField
 	private int state;
 
