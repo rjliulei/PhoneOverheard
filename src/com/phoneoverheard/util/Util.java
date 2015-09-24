@@ -1,5 +1,6 @@
 package com.phoneoverheard.util;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -362,6 +363,41 @@ public class Util {
 	public static int dp2Px(int dp, Context context) {
 		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.getResources()
 				.getDisplayMetrics());
+	}
+	
+	/** 
+	 * 打印数据库表中一行数据
+	 *
+	 * @author liulei	
+	 * @date 2015-9-24
+	 * @param obj
+	 * @return String   
+	*/
+	public static String printDb(Object obj) {
+		// TODO Auto-generated method stub
+
+		StringBuilder rsl = new StringBuilder();
+
+		Class self = obj.getClass();
+		Field[] fields = self.getDeclaredFields();
+
+		for (Field field : fields) {
+
+			field.setAccessible(true);
+			rsl.append(field.getName());
+			try {
+				rsl.append(field.get(obj));
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			rsl.append("\n");
+		}
+
+		return rsl.toString();
 	}
 
 	/********* 界面相关 *********/

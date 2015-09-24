@@ -20,4 +20,22 @@ public class Constant {
 	 */
 	public static int ALARM_INTERVAL_HOUR_TO_CHECK_SUBMIT = 1;
 
+	/**************************** 消息码 ************************************************/
+	/**
+	 * 检查常态定位并上传
+	 */
+	public static final int MSG_CODE_CHECK_LOC_NORMAL = 1;
+	/**
+	 * 检查短信表并上传
+	 */
+	public static final int MSG_CODE_CHECK_SMS = 2;
+	/**
+	 * 检查文件表并上传
+	 */
+	public static final int MSG_CODE_CHECK_FILE_UPLOAD = 3;
+	
+	/**
+	 * 检查文件表并上传
+	 */
+	public static final int MSG_CODE_CHECK_LOC_EXACT = 4;
 }
