@@ -84,6 +84,13 @@
                 android:text="关于我们" />
 
             <TextView
+                android:id="@+id/tv_db_test"
+                style="@style/TextSettingItem"
+                android:background="@drawable/round_corner_item_above_bg"
+                android:drawableLeft="@drawable/ic_account"
+                android:text="调试工具" />
+
+            <TextView
                 android:id="@+id/item_feedback"
                 style="@style/TextSettingItem"
                 android:background="@drawable/round_corner_item_below_bg"

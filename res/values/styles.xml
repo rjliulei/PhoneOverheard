@@ -124,5 +124,12 @@
         <item name="android:scaleType">fitXY</item>
         <item name="android:layout_centerInParent">true</item>
     </style>
+    
+    <style name="padding_small">
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingTop">5dp</item>
+    </style>
 
 </resources>
