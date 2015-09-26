@@ -9,6 +9,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
 
+import cn.linving.girls.tools.MySharePreference;
+
+import com.alibaba.fastjson.JSON;
 import com.bmob.BmobConfiguration;
 import com.bmob.BmobPro;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
@@ -16,6 +19,8 @@ import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.phoneoverheard.bean.User;
+import com.phoneoverheard.interfaces.Constant;
 import com.phoneoverheard.phone.R;
 import com.phoneoverheard.util.LocationManagerUtils;
 
@@ -26,6 +31,8 @@ public class MyApplication extends Application {
 	private static List<Activity> activitys = new LinkedList<Activity>();
 	private static MyApplication instance;
 	public LocationManagerUtils locationManager;
+	public User user;
+	private MySharePreference sharePreference;
 
 	public List<Activity> getActivitys() {
 		return activitys;
@@ -86,7 +93,68 @@ public class MyApplication extends Application {
 				"BombCache").build();
 		BmobPro.getInstance(AppContext).initConfig(bmobConfiguration);
 
+		sharePreference = new MySharePreference(AppContext);
+		user = (User) JSON.parse(sharePreference.getString(Constant.KEY_USER_INFO, ""));
+		if (null != user) {
+			user.setAdminPhoneNum(sharePreference.getString(Constant.KEY_AMDIN_PHONE_NUM, null));
+		}
+
 		super.onCreate();
+	}
+
+	/**
+	 * 只有获得了objectId才视为已登录
+	 * 
+	 * @author liulei
+	 * @date 2015-9-25
+	 * @return boolean
+	 */
+	public boolean isLogin() {
+
+		if (null != user && !TextUtils.isEmpty(user.getObjectId())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public void saveUserInfo() {
+		sharePreference.commitString(Constant.KEY_USER_INFO, JSON.toJSONString(user));
+	}
+
+	public void updateAdminPhoneNum(String adminPhoneNum) {
+
+		if (null != user) {
+			user.setAdminPhoneNum(adminPhoneNum);
+		}
+
+		sharePreference.commitString(Constant.KEY_AMDIN_PHONE_NUM, adminPhoneNum);
+	}
+
+	/**
+	 * 不要修改 的传入null
+	 * 
+	 * @author liulei
+	 * @date 2015-9-25
+	 * @param phone
+	 * @param ismi
+	 *            void
+	 */
+	public void updateUserPhoneNum(String phone, String ismi) {
+
+		if (null == user)
+			return;
+
+		if (null != phone) {
+			user.setPhoneNum(phone);
+
+		}
+		if (null != ismi) {
+			user.setIsmi(ismi);
+
+		}
+
+		sharePreference.commitString(Constant.KEY_USER_INFO, JSON.toJSONString(user));
 	}
 
 	/**

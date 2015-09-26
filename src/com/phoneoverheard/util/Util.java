@@ -7,6 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.Service;
 import android.app.ActivityManager.RunningServiceInfo;
 import android.app.ActivityManager.RunningTaskInfo;
 import android.app.Dialog;
@@ -176,9 +177,45 @@ public class Util {
 	/** 可直接使用Build.MODEL */
 	public static String getPhoneModel() {
 
-		String phoneModel = Build.MODEL;
+		return Build.MODEL;
+	}
 
-		return phoneModel;
+	public static String getISMI(Context context) {
+
+		TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+		return tm.getSubscriberId();
+	}
+
+	/**
+	 * 是否有sim卡
+	 * 
+	 * @author liulei
+	 * @date 2015-9-25
+	 * @param context
+	 * @return boolean
+	 */
+	public static boolean haveSim(Context context) {
+
+		boolean rsl = false;
+		
+		TelephonyManager tm = (TelephonyManager) context.getSystemService(Service.TELEPHONY_SERVICE);
+		int state = tm.getSimState();
+		switch (state) {
+		case TelephonyManager.SIM_STATE_READY:
+			// 有卡
+			rsl = true;
+			break;
+		case TelephonyManager.SIM_STATE_UNKNOWN:
+		case TelephonyManager.SIM_STATE_ABSENT:
+		case TelephonyManager.SIM_STATE_PIN_REQUIRED:
+		case TelephonyManager.SIM_STATE_PUK_REQUIRED:
+		case TelephonyManager.SIM_STATE_NETWORK_LOCKED:
+		default:
+			// 无卡
+			break;
+		}
+
+		return rsl;
 	}
 
 	/**
@@ -364,15 +401,15 @@ public class Util {
 		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.getResources()
 				.getDisplayMetrics());
 	}
-	
-	/** 
+
+	/**
 	 * 打印数据库表中一行数据
-	 *
-	 * @author liulei	
+	 * 
+	 * @author liulei
 	 * @date 2015-9-24
 	 * @param obj
-	 * @return String   
-	*/
+	 * @return String
+	 */
 	public static String printDb(Object obj) {
 		// TODO Auto-generated method stub
 

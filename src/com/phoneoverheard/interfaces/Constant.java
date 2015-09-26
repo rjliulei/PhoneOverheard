@@ -38,4 +38,15 @@ public class Constant {
 	 * 检查文件表并上传
 	 */
 	public static final int MSG_CODE_CHECK_LOC_EXACT = 4;
+	
+	/*****shared preference key*********/
+	/** 
+	 * 管理员手机号码
+	*/ 
+	public static final String KEY_AMDIN_PHONE_NUM = "KEY_AMDIN_PHONE_NUM";
+	/** 
+	 * 用户信息
+	*/ 
+	public static final String KEY_USER_INFO = "KEY_USER_INFO";
+	
 }

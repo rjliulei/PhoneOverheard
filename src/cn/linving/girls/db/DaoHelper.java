@@ -385,4 +385,17 @@ public class DaoHelper<T> {
 	}
 
 	// =================自定义SQL执行语句结束=================
+
+	public long count() {
+
+		long count = 0;
+		try {
+			count = dao.countOf();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return count;
+	}
 }

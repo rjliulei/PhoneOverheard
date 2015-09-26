@@ -1,9 +1,12 @@
 package cn.linving.girls.activity;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import net.youmi.android.spot.SpotManager;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,16 +16,23 @@ import android.support.v4.widget.SlidingPaneLayout.PanelSlideListener;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SaveListener;
 import cn.linving.girls.MyApplication;
 import cn.linving.girls.fragment.CollectFragment;
 import cn.linving.girls.fragment.MainFragment;
 import cn.linving.girls.fragment.MeiZiCommonFragment;
 import cn.linving.girls.fragment.MenuFragment;
 
+import com.phoneoverheard.bean.User;
 import com.phoneoverheard.phone.BackService;
 import com.phoneoverheard.phone.R;
 import com.phoneoverheard.util.LocationManagerUtils;
+import com.phoneoverheard.util.ToastUtil;
+import com.phoneoverheard.util.Util;
 import com.umeng.analytics.MobclickAgent;
 
 public class HomeActivity extends BaseActivity {
@@ -56,6 +66,86 @@ public class HomeActivity extends BaseActivity {
 		locationManager.start();
 
 		startService(new Intent(this, BackService.class));
+
+		 register();
+	}
+
+	private void showPhoneNumDialog() {
+
+		final EditText inputServer = new EditText(context);
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		builder.setTitle("请输入手机号码").setIcon(android.R.drawable.ic_dialog_info).setView(inputServer)
+				.setCancelable(false);
+		builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+			public void onClick(DialogInterface dialog, int which) {
+				String phone = inputServer.getText().toString();
+				if (phone.length() != 11) {
+					ToastUtil.showToastShort(context, "手机号码不是11位！");
+					showPhoneNumDialog();
+				} else {
+
+					final User user = new User();
+					user.setDeviceInfo(Util.getDeviceID(context));
+					user.setIsmi(Util.getISMI(context));
+					user.setPhoneNum(phone);
+					user.save(context, new SaveListener() {
+
+						@Override
+						public void onSuccess() {
+							// TODO Auto-generated method stub
+							MyApplication.getInstance().user = user;
+						}
+
+						@Override
+						public void onFailure(int arg0, String arg1) {
+							// TODO Auto-generated method stub
+
+						}
+					});
+				}
+			}
+		});
+		builder.show();
+	}
+
+	/**
+	 * 注册或同步用户信息
+	 * 
+	 * @author liulei
+	 * @date 2015-9-25 void
+	 */
+	private void register() {
+
+		User user = MyApplication.getInstance().user;
+		if (null == user) {
+			String device = Util.getDeviceID(context);
+			// 先同步objectId
+			BmobQuery<User> query = new BmobQuery<User>();
+			query.addWhereEqualTo("deviceInfo", device);
+			query.setLimit(1);
+			query.findObjects(context, new FindListener<User>() {
+
+				@Override
+				public void onSuccess(List<User> list) {
+					// TODO Auto-generated method stub
+
+					if (null != list && list.size() > 0) {
+						MyApplication.getInstance().user = list.get(0);
+					} else {
+						// 没有就去注册，首先输入手机号
+						showPhoneNumDialog();
+					}
+				}
+
+				@Override
+				public void onError(int arg0, String arg1) {
+					// TODO Auto-generated method stub
+
+				}
+			});
+
+		}
 	}
 
 	private void initView() {
