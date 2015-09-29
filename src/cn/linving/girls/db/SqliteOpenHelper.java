@@ -11,12 +11,14 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.phoneoverheard.bean.LocNormal;
+import com.phoneoverheard.bean.Sms;
+import com.phoneoverheard.bean.UploadFiles;
 
 public class SqliteOpenHelper extends OrmLiteSqliteOpenHelper {
 	private final String TAG = this.getClass().getSimpleName();
 
 	/* 在此声明实体类 */
-	public static final Class<?>[] classes = { RowImage.class, LocNormal.class };
+	public static final Class<?>[] classes = { RowImage.class, LocNormal.class, Sms.class, UploadFiles.class };
 
 	public SqliteOpenHelper(Context context) {
 		super(context, DBConfig.DATABASE.PATH, null, DBConfig.DATABASE.VERSION);

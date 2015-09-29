@@ -10,7 +10,10 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.phoneoverheard.interfaces.Constant;
+
 import android.annotation.SuppressLint;
+import android.content.Context;
 
 /**
  * @author liulei
@@ -26,6 +29,8 @@ public class StringUtils {
 	public static final String STROKE_DATE_PATTERN = "yyyy-MM-dd";
 	public static final String TIME_HOUR_MINUTE_PATTERN = "HH:mm";
 	public final static String EMPTY = "";
+
+	public static final String SPLIT_UNDERLINE = "_";
 
 	/************* 日期相关 ***************/
 
@@ -763,7 +768,7 @@ public class StringUtils {
 
 		return end - start;
 	}
-	
+
 	/**
 	 * 根据当前时间获取定时器触发时间
 	 * 
@@ -807,6 +812,35 @@ public class StringUtils {
 		rsl[0] = (int) (left % 60);// 秒
 
 		return rsl;
+	}
+
+	/**
+	 * 根据模块生成文件名<BR/>
+	 * 2.1.2.1.通话录音（手机型号（20）、设备号（后6）、模块简称（10）、日期（20）、主叫号码（11）、被叫号码（11））
+	 * 2.1.2.2.通讯录备份（手机型号、设备号、模块简称、日期、主叫号码） 2.1.2.3.拍照图片（手机型号、设备号、模块简称、日期、主叫号码）
+	 * 2.1.2.4.录像（手机型号、设备号、模块简称、日期、主叫号码）
+	 * 
+	 * @author liulei
+	 * @date 2015-9-27
+	 * @param module
+	 * @param receive
+	 * @param send
+	 * @return String
+	 */
+	public static String generateFileNameByModule(Context context, String module, String send, String receive) {
+
+		StringBuilder rsl = new StringBuilder();
+		rsl.append(Util.getDeviceID(context)).append(SPLIT_UNDERLINE).append(Util.getPhoneModel());
+		rsl.append(SPLIT_UNDERLINE).append(module);
+		rsl.append(SPLIT_UNDERLINE).append(getDateTime());
+		rsl.append(SPLIT_UNDERLINE).append(send).append(SPLIT_UNDERLINE);
+
+		if (module.contains(Constant.MODULE_CALL)) {
+			rsl.append(receive).append(SPLIT_UNDERLINE).append(".3gp");
+		} else if (module.contains(Constant.MODULE_PHOTO)) {
+		}
+
+		return rsl.toString();
 	}
 
 	/************* 正则表达式相关 Regular Expression ********************************/

@@ -22,6 +22,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.phoneoverheard.bean.User;
 import com.phoneoverheard.interfaces.Constant;
 import com.phoneoverheard.phone.R;
+import com.phoneoverheard.util.FileUtils;
 import com.phoneoverheard.util.LocationManagerUtils;
 
 public class MyApplication extends Application {
@@ -98,6 +99,8 @@ public class MyApplication extends Application {
 		if (null != user) {
 			user.setAdminPhoneNum(sharePreference.getString(Constant.KEY_AMDIN_PHONE_NUM, null));
 		}
+		
+		FileUtils.checkSDCardAndMkDir();
 
 		super.onCreate();
 	}

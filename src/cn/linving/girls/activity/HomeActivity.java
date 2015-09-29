@@ -18,9 +18,12 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import cn.bmob.push.BmobPush;
+import cn.bmob.v3.BmobInstallation;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.update.BmobUpdateAgent;
 import cn.linving.girls.MyApplication;
 import cn.linving.girls.fragment.CollectFragment;
 import cn.linving.girls.fragment.MainFragment;
@@ -28,6 +31,7 @@ import cn.linving.girls.fragment.MeiZiCommonFragment;
 import cn.linving.girls.fragment.MenuFragment;
 
 import com.phoneoverheard.bean.User;
+import com.phoneoverheard.interfaces.Constant;
 import com.phoneoverheard.phone.BackService;
 import com.phoneoverheard.phone.R;
 import com.phoneoverheard.util.LocationManagerUtils;
@@ -67,7 +71,16 @@ public class HomeActivity extends BaseActivity {
 
 		startService(new Intent(this, BackService.class));
 
-		 register();
+		register();
+		// 调试时使用用于在服务器端创建app更新相关表，发布版本时要删除此方法
+		BmobUpdateAgent.initAppVersion(this);
+		BmobUpdateAgent.silentUpdate(this);
+
+		// 开启debug服务后，可知晓push服务是否正常启动和运行
+		BmobPush.setDebugMode(true);
+		//
+		BmobPush.startWork(this, Constant.BMOB_APP_ID);
+		BmobInstallation.getCurrentInstallation(this).save();
 	}
 
 	private void showPhoneNumDialog() {

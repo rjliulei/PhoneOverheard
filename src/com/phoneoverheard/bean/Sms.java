@@ -18,18 +18,19 @@ public class Sms extends BmobObject {
 	*/
 	private static final long serialVersionUID = 1L;
 
+	@DatabaseField
 	private String userId;
 
-	//发件人
+	// 发件人
 	@DatabaseField
 	private String sendPhoneNum;
-	//收件人
+	// 收件人
 	@DatabaseField
 	private String receivePhoneNum;
-	//短信内容
+	// 短信内容
 	@DatabaseField
 	private String content;
-	//短信时间
+	// 短信时间
 	@DatabaseField
 	private String smsTime;
 	@DatabaseField(generatedId = true)
@@ -39,7 +40,7 @@ public class Sms extends BmobObject {
 	 */
 	@DatabaseField
 	private int state;
-	//系统数据库中的id
+	// 系统数据库中的id
 	@DatabaseField
 	private int idLocal;
 

